@@ -7,7 +7,7 @@ const dbUser = process.env.DB_USER;
 const mongoDBURI = process.env.MONGO_URI;
 
 const mongoURI =
-  `mongodb+srv://${dbUser}:${dbPWD}@cluster0.t5f55xn.mongodb.net/test` ||
+  `mongodb+srv://${dbUser}:${dbPWD}@cluster0.tbhfx1n.mongodb.net/shoePalace` ||
   mongoDBURI;
 
 const connectDB = async () => {
@@ -20,3 +20,5 @@ const connectDB = async () => {
     .catch((e) => console.dir(e));
 };
 module.exports = { connectDB };
+
+// mongodb+srv://Abhay4321:<password>@cluster0.tbhfx1n.mongodb.net/?retryWrites=true&w=majority

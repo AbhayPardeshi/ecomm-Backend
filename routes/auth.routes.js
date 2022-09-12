@@ -49,6 +49,7 @@ authV1.route("/login").post(async (req, res) => {
 authV1.route(`/signup`).post(async (req, res) => {
   try {
     const user = req.body;
+    console.log(user);
     const NewUser = new User({
       ...user,
       _id: uuid(),

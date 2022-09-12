@@ -8,7 +8,7 @@ const authVerify = (req, res, next) => {
     req.user = { userId: decodedToken[0]._id };
     return next();
   } catch (err) {
-    console.log(err.message);
+    // console.log(err.message);
     return res.status(401).json({
       message: "Unauthorised access, please add the token",
       errorMessage: err.message,
