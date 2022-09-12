@@ -1,5 +1,5 @@
 const DocsObj = {
-  title: "Swadeshi-Ecomm-App",
+  title: "ShoePalace-Clone-App",
   description: "This is backend for E-commenrce app.",
   author: "Abhay Pardeshi",
   features: [
