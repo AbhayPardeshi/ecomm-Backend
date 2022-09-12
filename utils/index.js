@@ -1,7 +1,7 @@
 const DocsObj = {
   title: "Swadeshi-Ecomm-App",
   description: "This is backend for E-commenrce app.",
-  author: "Rishikesh Shinde",
+  author: "Abhay Pardeshi",
   features: [
     "Auth-Management",
     "Products-Management",
