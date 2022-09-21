@@ -1,6 +1,7 @@
 const express = require("express");
 const categoryV1 = express.Router();
 const { Category } = require("../models/category.models");
+const { Product } = require("../models/product.models");
 
 categoryV1
   .route("/")

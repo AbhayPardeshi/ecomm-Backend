@@ -26,11 +26,11 @@ authV1.route("/login").post(async (req, res) => {
       process.env.USER_PWD_SECRET
     );
     if (userData.password === password) {
-      console.log("Founduser", foundUser);
+      // console.log("Founduser", foundUser);
       const encodedToken = sign({ ...foundUser }, process.env.USER_PWD_SECRET, {
         expiresIn: "24h",
       });
-      res.json({ success: true, encodedToken });
+      res.status(200).json({ success: true, encodedToken });
     } else {
       res.status(401).json({
         success: false,
@@ -61,7 +61,7 @@ authV1.route(`/signup`).post(async (req, res) => {
       process.env.USER_PWD_SECRET,
       { expiresIn: "24h" }
     );
-    res.json({ success: true, savedUser, encodedToken });
+    res.status(201).json({ success: true, savedUser, encodedToken });
   } catch (err) {
     res.status(500).json({
       success: false,
