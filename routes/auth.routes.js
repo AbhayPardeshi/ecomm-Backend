@@ -53,7 +53,7 @@ authV1.route(`/signup`).post(async (req, res) => {
     const isDuplicateUser = User.find({ email: userEmail });
 
     if (isDuplicateUser) {
-      res.status(203).json({ success: false, message: "User already exsits." });
+      res.status(422).json({ success: false, message: "User already exists." });
     } else {
       const NewUser = new User({
         ...user,
