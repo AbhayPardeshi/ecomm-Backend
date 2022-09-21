@@ -49,19 +49,28 @@ authV1.route("/login").post(async (req, res) => {
 authV1.route(`/signup`).post(async (req, res) => {
   try {
     const user = req.body;
-    console.log(user);
-    const NewUser = new User({
-      ...user,
-      _id: uuid(),
-      password: sign({ password: user.password }, process.env.USER_PWD_SECRET),
-    });
-    const savedUser = await NewUser.save();
-    const encodedToken = sign(
-      { _id: savedUser._id, email: savedUser.email },
-      process.env.USER_PWD_SECRET,
-      { expiresIn: "24h" }
-    );
-    res.status(201).json({ success: true, savedUser, encodedToken });
+    const userEmail = user.email;
+    const isDuplicateUser = User.find({ email: userEmail });
+
+    if (isDuplicateUser) {
+      res.status().json({ success: false, message: "User already exsits." });
+    } else {
+      const NewUser = new User({
+        ...user,
+        _id: uuid(),
+        password: sign(
+          { password: user.password },
+          process.env.USER_PWD_SECRET
+        ),
+      });
+      const savedUser = await NewUser.save();
+      const encodedToken = sign(
+        { _id: savedUser._id, email: savedUser.email },
+        process.env.USER_PWD_SECRET,
+        { expiresIn: "24h" }
+      );
+      res.status(201).json({ success: true, savedUser, encodedToken });
+    }
   } catch (err) {
     res.status(500).json({
       success: false,
