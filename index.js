@@ -7,13 +7,12 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.set("json spaces", 4);
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
-const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
 
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 const { connectDB } = require("./db/db.connect.js");
 
