@@ -26,11 +26,10 @@ authV1.route("/login").post(async (req, res) => {
       process.env.USER_PWD_SECRET
     );
     if (userData.password === password) {
-      // console.log("Founduser", foundUser);
       const encodedToken = sign({ ...foundUser }, process.env.USER_PWD_SECRET, {
         expiresIn: "24h",
       });
-      res.status(200).json({ success: true, encodedToken });
+      res.json({ success: true, encodedToken });
     } else {
       res.status(401).json({
         success: false,
@@ -51,9 +50,11 @@ authV1.route(`/signup`).post(async (req, res) => {
     const user = req.body;
     const userEmail = user.email;
     const isDuplicateUser = await User.find({ email: userEmail }).count();
-
     if (isDuplicateUser) {
-      res.status(422).json({ success: false, message: "User already exists." });
+      res.status(422).json({
+        success: false,
+        message: "User already exists.",
+      });
     } else {
       const NewUser = new User({
         ...user,
@@ -74,7 +75,7 @@ authV1.route(`/signup`).post(async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "unable to add new user.",
+      message: "Unable to add new user.",
       errorMessage: err.message,
     });
   }
