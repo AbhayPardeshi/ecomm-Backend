@@ -8,11 +8,7 @@ app.use(express.json());
 app.set("json spaces", 4);
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors());
 
 const { connectDB } = require("./db/db.connect.js");
 
