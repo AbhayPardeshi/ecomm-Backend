@@ -1,11 +1,19 @@
 const express = require("express");
-var cors = require("cors");
+const cors = require("cors");
 require("dotenv").config();
 
-const app = express();
+let app = express();
 const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.set("json spaces", 4);
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 
