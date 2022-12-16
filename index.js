@@ -6,19 +6,10 @@ let app = express();
 const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
-app.all("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin:http://localhost:3000");
-  res.header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers: Content-Type, Authorization");
-  next();
-});
 app.set("json spaces", 4);
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 
 const { connectDB } = require("./db/db.connect.js");
-
-connectDB();
-
 const { DocsObj } = require("./utils");
 const { productsV1 } = require("./routes/product.routes");
 const { categoryV1 } = require("./routes/categories.routes");
@@ -67,6 +58,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+  });
 });
