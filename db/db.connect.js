@@ -21,4 +21,3 @@ const connectDB = async () => {
 };
 module.exports = { connectDB };
 
-// mongodb+srv://Abhay4321:<password>@cluster0.tbhfx1n.mongodb.net/?retryWrites=true&w=majority
